@@ -19,7 +19,7 @@ const ibmPLexSerif=IBM_Plex_Serif({
 
 export const metadata: Metadata = {
   title: "Horizon",
-  description: "Horizon is a modern Baning  platform for everyone",
+  description: "Horizon is a modern Banking  platform for everyone",
   icons:{
     icon:'/icons/logo.svg'
   }
@@ -47,7 +47,7 @@ export default function RootLayout({
           >
             {children}
 
-            <ModeToggle />
+            
           </ThemeProvider>
 
       </body>

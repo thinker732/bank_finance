@@ -39,6 +39,7 @@ declare type User = {
   postalCode: string;
   dateOfBirth: string;
   ssn: string;
+  currency:string;
 };
 
 declare type NewUserParams = {
@@ -139,6 +140,7 @@ declare type NewDwollaCustomerParams = {
 declare interface CreditCardProps {
   account: Account;
   userName: string;
+  currency:string;
   showBalance?: boolean;
 }
 
@@ -202,10 +204,11 @@ declare interface BankTabItemProps {
   appwriteItemId?: string;
 }
 
-declare interface TotlaBalanceBoxProps {
+declare interface TotalBalanceBoxProps {
   accounts: Account[];
   totalBanks: number;
   totalCurrentBalance: number;
+  currency:string
 }
 
 declare interface FooterProps {
