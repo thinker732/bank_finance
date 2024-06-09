@@ -3,7 +3,21 @@ import RightSideBar from '@/components/RightSideBar'
 import TotalBalanceBox from '@/components/TotalBalanceBox'
 import React from 'react'
 
-const Home = () => {
+/**
+ * 
+ * Manage session
+ */
+import { getLoggedInUser } from "@/lib/actions/user.actions";
+import { redirect } from "next/navigation";
+
+const Home = async () => {
+
+    const user = await getLoggedInUser();
+
+    if (!user) 
+        redirect("/sign-in");
+
+    
 
     const loggedIn={firstName:'Daniel',lastName:'BAED',email:'baed@baed.Com',currency:'XAF'}
   return (
