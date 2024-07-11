@@ -12,14 +12,15 @@ import { redirect } from "next/navigation";
 
 const Home = async () => {
 
-    const user = await getLoggedInUser();
+    const loggedIn=await getLoggedInUser();
 
-    if (!user) 
-        redirect("/sign-in");
+   if (!loggedIn) 
+     redirect("/sign-in");
 
     
 
-    const loggedIn={firstName:'Daniel',lastName:'BAED',email:'baed@baed.Com',currency:'XAF'}
+ 
+
   return (
     <section className='home'>
         <div className="home-content">
@@ -27,7 +28,7 @@ const Home = async () => {
                 <HeaderBox
                     type="greeting"
                     title="Welcome"
-                    user={loggedIn?.firstName || 'Guest'}
+                    user={loggedIn?.name || 'Guest'}
                     subtext="Access and manage your account and transactions efficiently"
                 />
 
@@ -35,8 +36,8 @@ const Home = async () => {
                 <TotalBalanceBox
                  accounts={[]}
                  totalBanks={1}
-                 totalCurrentBalance={125635}
-                 currency={loggedIn?.currency}
+                 totalCurrentBalance={12563500000}
+                 currency={loggedIn.currency?loggedIn.currency:'XAF'}
                 />
             </header>
 
@@ -44,9 +45,9 @@ const Home = async () => {
         </div>
 
         <RightSideBar
-            user={loggedIn}
+            user={loggedIn} 
             transactions={[]}
-            banks={[{currentBalance:1200000},{currentBalance:42200000}]}
+            banks={[{currentBalance:1200000000},{currentBalance:4220000000}]}
          />
 
     </section>

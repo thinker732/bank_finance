@@ -26,7 +26,7 @@ const CustomInput = ({control,fieldName,label,placeholder,}:
                                 <FormControl>
                                     <Input 
                                     placeholder={placeholder}
-                                    type={fieldName==='password'?'password':'text'}
+                                    type={(fieldName.startsWith('password'))?'password':'text'}
                                     {...field}
                                     />
                                 </FormControl>

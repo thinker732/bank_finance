@@ -24,6 +24,7 @@ import { z } from 'zod'
 import { Loader2 } from 'lucide-react'
 import SignUp from '@/app/(auth)/sign-up/page'
 import { useRouter } from 'next/navigation'
+import { getLoggedInUser, signIn, signUp } from '@/lib/actions/user.actions'
 
 
 
@@ -31,6 +32,8 @@ const AuthForm = ({type}:{type:string}) => {
   const router = useRouter()
   const [user, setuser] = useState(null)
   const [isloading, setIsloading] = useState(false)
+
+  
 
   const formSchema=authFormSchema(type)
 
@@ -46,6 +49,7 @@ const AuthForm = ({type}:{type:string}) => {
  
   // 2. Define a submit handler.
   const onSubmit=async (data: z.infer<typeof formSchema>)=>{
+    console.log("test")
     setIsloading(true)
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
@@ -55,20 +59,20 @@ const AuthForm = ({type}:{type:string}) => {
         //sign up with Ap Write and create a plain link token
 
         if(type='sign-up'){
-          // const newUser=await signUp(data)
+            const newUser=await signUp(data)
 
-           //setuser(newUser)
+            setuser(newUser)
         }
 
         if(type='sign-in'){
 
           
-          //  const response=await signIn({
-          //     email:data.email,
-          //     password:data.password,
-          //   })
+            const response=await signIn({
+               email:data.email,
+               password:data.password,
+             })
 
-          //  if(response) router.push('/')
+              if(response) router.push('/')
         }
 
       } catch (error) {
@@ -156,6 +160,11 @@ const AuthForm = ({type}:{type:string}) => {
 
              <CustomInput control={form.control}  fieldName="email" label="Email" placeholder="enter your Email"/>
              <CustomInput control={form.control}  fieldName="password" label="Password" placeholder="enter your password"/>
+            {
+              type=='sign-up' && (
+                <CustomInput control={form.control}  fieldName="password1" label="Confirm Password" placeholder="enter your password again"/>
+              )
+            }
           
           <div className="flex flex-col gap-4">
           <Button type="submit" className='form-btn' disabled={isloading}>{

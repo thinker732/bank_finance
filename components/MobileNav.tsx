@@ -15,6 +15,7 @@ import { sidebarLinks } from '@/constants'
 import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
 import { ModeToggle } from './Toogle-theme'
+import Footer from './Footer'
 
 
 
@@ -74,8 +75,10 @@ const MobileNav = ({user}:MobileNavProps) => {
                  </nav>
               </SheetClose>
 
-                  FOOTER
-                  <ModeToggle />
+
+                  <Footer user={user} type='mobile'></Footer>  
+                  {/* {FOOTER
+                  <ModeToggle />} */}
             </div>
         </SheetContent>
     </Sheet>

@@ -214,7 +214,36 @@ export const authFormSchema=(type:string)=>z.object({
   }),
 
   //EXtra field
-  password1:z.string().min(8, {
+  password1:type==='sign-in'?z.string().optional():z.string().min(8, {
     message: "Password lenght should be greater than 8",
   }),
+
+}).superRefine((val, ctx) => {
+  if (type!='sign-in' && val.password !== val.password1) {
+    console.log('valid')
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ['password1'],
+      message: 'Passwords do not match',
+    });
+  }
 })
+
+
+export const formSchema = z.object({
+  // ...
+  password: z.string().refine(
+    (val) => /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(val),
+    { message: 'Password must be at least 8 characters long and contain at least one uppercase character, one lowercase character, and one special symbol' }),
+  confirmPassword: z.string(),
+  // ...
+})
+.superRefine((val, ctx) => {
+  if (val.password !== val.confirmPassword) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ['confirmPassword'],
+      message: 'Passwords do not match',
+    });
+  }
+});
