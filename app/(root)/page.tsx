@@ -14,8 +14,7 @@ const Home = async () => {
 
     const loggedIn=await getLoggedInUser();
 
-   if (!loggedIn) 
-     redirect("/sign-in");
+   
 
     
 

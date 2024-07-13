@@ -17,12 +17,11 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+
 import CustomInput from './CustomInput'
 import {authFormSchema} from '@/lib/utils'
 import { z } from 'zod'
 import { Loader2 } from 'lucide-react'
-import SignUp from '@/app/(auth)/sign-up/page'
 import { useRouter } from 'next/navigation'
 import { getLoggedInUser, signIn, signUp } from '@/lib/actions/user.actions'
 
@@ -72,7 +71,11 @@ const AuthForm = ({type}:{type:string}) => {
                password:data.password,
              })
 
-              if(response) router.push('/')
+             
+
+              if(response){
+                router.push('/')
+              } 
         }
 
       } catch (error) {
